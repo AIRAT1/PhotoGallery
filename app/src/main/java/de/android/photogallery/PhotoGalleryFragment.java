@@ -1,5 +1,6 @@
 package de.android.photogallery;
 
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -10,12 +11,15 @@ import android.view.View;
 import android.view.ViewGroup;
 
 public class PhotoGalleryFragment extends Fragment {
+    private static final String TAG = PhotoGalleryFragment.class.getSimpleName();
+
     private RecyclerView recyclerView;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setRetainInstance(true);
+        new FetchItemTask().execute();
     }
 
     public static Fragment newInstance() {
@@ -29,5 +33,14 @@ public class PhotoGalleryFragment extends Fragment {
         recyclerView = (RecyclerView)view.findViewById(R.id.fragment_photo_gallery_recycler_view);
         recyclerView.setLayoutManager(new GridLayoutManager(getActivity(), 3));
         return view;
+    }
+
+    private class FetchItemTask extends AsyncTask<Void, Void, Void> {
+
+        @Override
+        protected Void doInBackground(Void... voids) {
+            new FlickrFetchr().fetchItems();
+            return null;
+        }
     }
 }
