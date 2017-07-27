@@ -27,6 +27,7 @@ public class PhotoGalleryFragment extends Fragment {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setRetainInstance(true);
+        setHasOptionsMenu(true);
         fetchItemTask = new FetchItemTask();
         fetchItemTask.execute();
     }
