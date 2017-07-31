@@ -35,6 +35,7 @@ public class PhotoGalleryFragment extends Fragment {
         setHasOptionsMenu(true);
         fetchItemTask = new FetchItemTask(QueryPreferences.getStoredQuery(getActivity()));
         updateItems();
+        PollService.setServiceAlarm(getActivity(), true);
     }
 
     @Override
