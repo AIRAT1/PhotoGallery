@@ -1,7 +1,9 @@
 package de.android.photogallery;
 
+import android.net.Uri;
+
 public class GalleryItem {
-    private String caption, id, url;
+    private String caption, id, url, owner;
 
     @Override
     public String toString() {
@@ -30,5 +32,21 @@ public class GalleryItem {
 
     public void setUrl(String url) {
         this.url = url;
+    }
+
+    public String getOwner() {
+        return owner;
+    }
+
+    public void setOwner(String owner) {
+        this.owner = owner;
+    }
+
+    public Uri getPhotoPageUri() {
+        return Uri.parse("http://flickr.com/photos/")
+                .buildUpon()
+                .appendPath(owner)
+                .appendPath(id)
+                .build();
     }
 }
